@@ -246,10 +246,17 @@
 
       <button id="add-row-btn" class="secondary">Add row</button>
 
+      <!-- No-entry checkbox: always visible; grading logic decides when it's correct -->
+      <label id="no-entry-wrapper"
+             style="display:block; margin-top:8px; font-size:13px; color:#374151;">
+        <input type="checkbox" id="no-entry-checkbox" />
+        No journal entry is required for this item.
+      </label>
+
       <div class="controls">
         <button id="prev-btn" class="secondary">Previous</button>
         <button id="next-btn" class="secondary">Next</button>
-        <button id="check-btn" class="primary">Check answer</button>
+        <button id="check-btn" class="primary">Submit journal entry</button>
         <button id="clear-btn" class="secondary">Clear entry</button>
         <button id="open-chart-btn" class="secondary">Open chart of accounts</button>
         <button id="tb-btn" class="secondary">View trial balance</button>
