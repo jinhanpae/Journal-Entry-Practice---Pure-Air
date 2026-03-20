@@ -2,242 +2,63 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Journal Entry Practice for Pure Air</title>
-  <style>
-    body {
-      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-      background: #0f172a;
-      margin: 0;
-      padding: 32px 16px;
-    }
-    .container {
-      max-width: 720px;
-      margin: 0 auto;
-      background: #ffffff;
-      padding: 28px 32px 24px;
-      border-radius: 18px;
-      box-shadow:
-        0 24px 60px rgba(15, 23, 42, 0.35),
-        0 0 0 1px rgba(148, 163, 184, 0.35);
-      border: 1px solid #e5e7eb;
-    }
-    h1 {
-      margin: 0 0 4px;
-      font-size: 24px;
-      text-align: center;
-      color: #0f172a;
-    }
-    .subtitle {
-      text-align: center;
-      font-size: 13px;
-      color: #6b7280;
-      margin-bottom: 18px;
-    }
-    .tx-title {
-      font-weight: 600;
-      margin-bottom: 4px;
-      color: #111827;
-    }
-    .tx-description {
-      font-size: 14px;
-      color: #374151;
-      margin-bottom: 14px;
-      white-space: pre-line;
-    }
-    .journal-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 8px;
-    }
-    .journal-table th,
-    .journal-table td {
-      border: 1px solid #e5e7eb;
-      padding: 6px 8px;
-      font-size: 13px;
-    }
-    .journal-table th {
-      background: #f9fafb;
-      text-align: left;
-    }
-    .journal-table input {
-      width: 100%;
-      border: none;
-      font-size: 13px;
-      padding: 4px;
-      outline: none;
-    }
-    .controls {
-      margin-top: 8px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    button {
-      padding: 8px 14px;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      font-size: 13px;
-      cursor: pointer;
-    }
-    .primary {
-      background: linear-gradient(135deg, #2563eb, #1d4ed8);
-      color: #f9fafb;
-    }
-    .secondary {
-      background: #ffffff;
-      color: #374151;
-      border-color: #d1d5db;
-    }
-    .feedback {
-      margin-top: 14px;
-      padding: 10px 12px;
-      border-radius: 10px;
-      font-size: 13px;
-      border: 1px solid transparent;
-      white-space: pre-line;
-    }
-    .feedback.correct {
-      background: #ecfdf5;
-      border-color: #bbf7d0;
-      color: #166534;
-    }
-    .feedback.incorrect {
-      background: #fef2f2;
-      border-color: #fecaca;
-      color: #b91c1c;
-    }
-    .score-summary {
-      margin-top: 6px;
-      font-size: 12px;
-      color: #6b7280;
-      text-align: right;
-    }
-    .app-footer {
-      margin-top: 16px;
-      font-size: 11px;
-      color: #6b7280;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-  </style>
+  <title>Journal Entry Practice</title>
+
+  <!-- All layout and visual styles live in JEStyles.css -->
+  <link rel="stylesheet" href="JEStyles.css" />
 </head>
 <body>
-  <!-- Initial login screen -->
-  <div id="login-overlay" style="
-    position: fixed;
-    inset: 0;
-    background: #0f172a;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-  ">
-    <div style="
-      background: #ffffff;
-      padding: 28px 32px 24px;
-      border-radius: 18px;
-      box-shadow:
-        0 24px 60px rgba(15, 23, 42, 0.35),
-        0 0 0 1px rgba(148, 163, 184, 0.35);
-      border: 1px solid #e5e7eb;
-      max-width: 400px;
-      width: 90%;
-      box-sizing: border-box;
-    ">
-      <h1 style="margin: 0 0 8px; font-size: 22px; text-align: center; color: #0f172a;">
-        Journal Entry Practice<br />for Pure Air
-      </h1>
-      <p style="text-align: center; font-size: 13px; color: #6b7280; margin: 0 0 18px;">
-        Enter your name (optional) and password to begin.
-      </p>
-
-      <div style="margin-bottom: 14px;">
-        <label for="student-name" style="
-          display: block;
-          font-size: 13px;
-          font-weight: 600;
-          color: #111827;
-          margin-bottom: 4px;
-        ">Name (optional)</label>
+  <!-- Login overlay: collect student name and password before starting -->
+  <div id="login-overlay" class="login-overlay">
+    <div class="login-card">
+      <h1 id="login-title" class="login-title"></h1>
+      <h2 id="login-subtitle" class="login-subtitle"></h2>
+      <p id="login-prompt" class="login-prompt"></p>
+      
+      <div class="login-field">
+        <label for="student-name" class="login-label">Name:</label>
         <input
           type="text"
           id="student-name"
-          placeholder="Your name"
-          style="
-            width: 100%;
-            padding: 8px 10px;
-            font-size: 13px;
-            border-radius: 8px;
-            border: 1px solid #e5e7eb;
-            box-sizing: border-box;
-          "
+          class="login-input"
+          placeholder="Your name (optional)"
         />
       </div>
 
-      <div style="margin-bottom: 18px;">
-        <label for="password-input" style="
-          display: block;
-          font-size: 13px;
-          font-weight: 600;
-          color: #111827;
-          margin-bottom: 4px;
-        ">Password</label>
+      <div class="login-field">
+        <label for="password-input" class="login-label">Password:</label>
         <input
           type="password"
           id="password-input"
+          class="login-input"
           placeholder="Enter password"
-          style="
-            width: 100%;
-            padding: 8px 10px;
-            font-size: 13px;
-            border-radius: 8px;
-            border: 1px solid #e5e7eb;
-            box-sizing: border-box;
-          "
         />
-        <div id="login-error" style="
-          margin-top: 6px;
-          font-size: 12px;
-          color: #b91c1c;
-          min-height: 16px;
-        "></div>
+        <div id="login-error" class="login-error"></div>
       </div>
 
-      <button id="login-btn" style="
-        width: 100%;
-        padding: 9px 14px;
-        border-radius: 999px;
-        border: 1px solid transparent;
-        font-size: 13px;
-        cursor: pointer;
-        background: linear-gradient(135deg, #2563eb, #1d4ed8);
-        color: #f9fafb;
-        font-weight: 600;
-      ">
-        Start practice
+      <button id="login-btn" class="login-button">
+        <span id="login-button-label"></span>
       </button>
     </div>
   </div>
 
-  <!-- Main app (hidden until password correct) -->
-  <div id="main-app" style="display: none;">
+  <!-- Main journal-entry practice interface (shown after login or if login disabled) -->
+  <div id="main-app" class="main-app hidden">
     <div class="container">
-      <h1>Journal Entry Practice for Pure Air</h1>
-      <div class="subtitle">
-        Journal entries for Transactions (1)–(10). Enter 3‑digit account codes.
-      </div>
+      <h1 id="app-title"></h1>
+      <div id="app-subtitle" class="subtitle"></div>
 
+      <!-- Current transaction / event description -->
       <div id="tx-title" class="tx-title"></div>
       <div id="tx-description" class="tx-description"></div>
 
+      <!-- Journal entry input table -->
       <table class="journal-table">
         <thead>
           <tr>
-            <th style="width:15%;">ID</th>
+            <th style="width:14%;">Code</th>
             <th style="width:40%;">Account</th>
-            <th style="width:22%;">Debit</th>
+            <th style="width:23%;">Debit</th>
             <th style="width:23%;">Credit</th>
           </tr>
         </thead>
@@ -246,20 +67,22 @@
 
       <button id="add-row-btn" class="secondary">Add row</button>
 
-      <!-- No-entry checkbox: always visible; grading logic decides when it's correct -->
-      <label id="no-entry-wrapper"
-             style="display:block; margin-top:8px; font-size:13px; color:#374151;">
+      <!-- For items that do not require a journal entry -->
+      <label id="no-entry-wrapper" class="no-entry-wrapper">
         <input type="checkbox" id="no-entry-checkbox" />
         No journal entry is required for this item.
       </label>
 
+      <!-- Navigation and supporting tools (chart, TB, ledger) -->
       <div class="controls">
         <button id="prev-btn" class="secondary">Previous</button>
         <button id="check-btn" class="primary">Submit journal entry</button>
         <button id="next-btn" class="secondary">Next</button>
         <button id="clear-btn" class="secondary">Clear entry</button>
+
         <button id="open-chart-btn" class="secondary">Open chart of accounts</button>
         <button id="tb-btn" class="secondary">Prepare trial balance</button>
+        <button id="ledger-btn" class="secondary">View general ledger</button>
         <button id="reset-all-btn" class="secondary">Start over</button>
       </div>
 
@@ -269,64 +92,12 @@
     </div>
   </div>
 
-  <script src="journalChartOfAccounts.obf.js"></script>
-  <script src="journalQuestions.obf.js"></script>
+  <!-- Config and data (pure JS objects) -->
+  <script src="JEConfig.js"></script>
+  <script src="JEChartOfAccounts.js"></script>
+  <script src="JEQuestions.js"></script>
 
-  <!-- Fetch IP once and store in window.USER_IP -->
-  <script>
-    window.USER_IP = "not available";
-    fetch("https://api.ipify.org?format=json")
-      .then(r => r.json())
-      .then(d => {
-        if (d && d.ip) {
-          window.USER_IP = d.ip;
-        }
-      })
-      .catch(() => {
-        window.USER_IP = "not available";
-      });
-  </script>
-
-  <script src="journalApp.obf.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      // Chart window
-      const btn = document.getElementById("open-chart-btn");
-      if (btn) {
-        btn.addEventListener("click", () => {
-          window.open("journalChart.html", "SoftbyteCOA", "width=500,height=500");
-        });
-      }
-
-      // Login logic
-      const loginOverlay = document.getElementById("login-overlay");
-      const mainApp = document.getElementById("main-app");
-      const loginBtn = document.getElementById("login-btn");
-      const nameInput = document.getElementById("student-name");
-      const passInput = document.getElementById("password-input");
-      const loginError = document.getElementById("login-error");
-
-      function attemptLogin() {
-        const pw = (passInput.value || "").trim();
-        if (pw === "KUBS") {
-          const nm = (nameInput.value || "").trim();
-          if (nm) {
-            sessionStorage.setItem("studentName", nm);
-          }
-          loginOverlay.style.display = "none";
-          mainApp.style.display = "block";
-        } else {
-          loginError.textContent = "Incorrect password. Please try again!";
-          passInput.value = "";
-          passInput.focus();
-        }
-      }
-
-      loginBtn.addEventListener("click", attemptLogin);
-      passInput.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") attemptLogin();
-      });
-    });
-  </script>
+  <!-- App logic and UI wiring -->
+  <script src="JEApp.js"></script>
 </body>
 </html>
