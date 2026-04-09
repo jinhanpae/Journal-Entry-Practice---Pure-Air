@@ -8,7 +8,7 @@ This web-based app lets students practice journal entries for **Pure Air (Ch 1)*
 
 The app is available online:
 
-- **URL:** https://jinhanpae.github.io/JournalEntries-app/
+- **URL:** https://jinhanpae.github.io/Journal-Entry-Practice---Pure-Air/
 
 You can:
 
